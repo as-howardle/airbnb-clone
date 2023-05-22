@@ -189,7 +189,6 @@ export default function RentModal() {
           value={roomCount}
           onChange={(value) => setCustomValue('roomCount', value)}
         />
-        RentM
         <hr />
         <Counter
           title='Bathrooms'
