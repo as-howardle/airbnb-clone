@@ -1,7 +1,8 @@
 'use client';
 
 import useRegisterModal from '../hooks/useRegisterModal';
-import { useState } from 'react';
+import useLoginModal from './../hooks/useLoginModal';
+import { useState, useCallback } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import axios from 'axios';
 import Modal from './Modal';
@@ -15,6 +16,7 @@ import { signIn } from 'next-auth/react';
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
@@ -41,6 +43,11 @@ const RegisterModal = () => {
         setIsLoading(false);
       });
   };
+
+  const toggle = useCallback(() => {
+    registerModal.onClose();
+    loginModal.onOpen();
+  }, []);
 
   const bodyContent = (
     <div className='flex flex-col gap-4'>
@@ -80,7 +87,7 @@ const RegisterModal = () => {
         outline
         label='Continue with Google'
         icon={FcGoogle}
-        onClick={() => {}}
+        onClick={() => signIn('google')}
       />
       <Button
         outline
@@ -94,7 +101,7 @@ const RegisterModal = () => {
         </div>
         <div
           className='text-neutral-800 cursor-pointer hover:underline'
-          onClick={registerModal.onClose}
+          onClick={toggle}
         >
           Log in
         </div>
