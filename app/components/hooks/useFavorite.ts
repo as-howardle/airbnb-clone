@@ -7,7 +7,7 @@ import toast from 'react-hot-toast'
 
 interface IUseFavorite {
 	listingId: string;
-	currentUser: SafeUser | null;
+	currentUser: SafeUser | null | undefined;
 }
 
 const useFavorite = ({
